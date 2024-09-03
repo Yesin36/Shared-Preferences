@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.gogote.sharedpreferences.databinding.ActivityMain2Binding
+import com.google.gson.Gson
 
 class MainActivity2 : AppCompatActivity() {
     private lateinit var binding: ActivityMain2Binding
@@ -21,6 +22,14 @@ class MainActivity2 : AppCompatActivity() {
         }
 
         val editor = getSharedPreferences("data", MODE_PRIVATE)
-        binding.textView.setText("Your name is ${editor.getString("name",null)}" + "your password is ${editor.getString("pass",null)}")
+        val user = Gson().fromJson(editor.getString("USER_DATA",null),User::class.java)
+        binding.textView.setText("Your name is ${user.name}" + "your password is ${user.pass}")
+
+
+
+
+
+
+//        binding.textView.setText("Your name is ${editor.getString("name",null)}" + "your password is ${editor.getString("pass",null)}")
     }
 }
